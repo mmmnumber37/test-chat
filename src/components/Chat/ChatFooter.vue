@@ -50,25 +50,27 @@ export default {
     ...mapActions(['addMessage']),
 
     async sendMessage() {
-      this.sending = true;
+      if (this.message) {
+        this.sending = true;
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
-      try {
-        await this.addMessage({
-          chatId: Number(this.$route.params.id),
-          message: {
-            id: this.lastMessageId + 1,
-            author: this.authorOutgoingMessage,
-            text: this.message,
-            created: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm')
-          }
-        });
+        try {
+          await this.addMessage({
+            chatId: Number(this.$route.params.id),
+            message: {
+              id: this.lastMessageId + 1,
+              author: this.authorOutgoingMessage,
+              text: this.message,
+              created: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm')
+            }
+          });
 
-        this.message = '';
-      } catch (error) {}
+          this.message = '';
+        } catch (error) {}
 
-      this.sending = false;
+        this.sending = false;
+      }
     }
   }
 };

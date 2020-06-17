@@ -108,6 +108,7 @@ export default {
   }
 
   &__last-message {
+    color: #7d8790;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
